@@ -1,0 +1,14 @@
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\bin\Debug\net6.0\HabitTrackingDatabase.deps.json
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\bin\Debug\net6.0\HabitTrackingDatabase.dll
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\bin\Debug\net6.0\HabitTrackingDatabase.pdb
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.AssemblyInfo.cs
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.dll
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\refint\HabitTrackingDatabase.dll
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.pdb
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\ref\HabitTrackingDatabase.dll
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\bin\Debug\net6.0\HabitTrackingDatabase.runtimeconfig.json
+C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTrackingDatabase\obj\Debug\net6.0\HabitTrackingDatabase.genruntimeconfig.cache
