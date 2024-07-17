@@ -31,7 +31,7 @@ namespace HabitTracker
                     Console.WriteLine("Type 4 to Update Record");
                     Console.WriteLine("----------------------------\n");
                     Console.Write("Enter choice: ");
-                    choice = Console.ReadLine();
+                    choice = Console.ReadLine().Trim();
                     switch (choice)
                     {
                         case "0":
@@ -50,7 +50,7 @@ namespace HabitTracker
                             db.UpdateHabits();
                             break;
                         default:
-                            Console.WriteLine("Invalid choice");
+                            Console.WriteLine("Invalid choice\n\n");
                             break;
                     }
                 } while (choice != "0");

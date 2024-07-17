@@ -3,8 +3,6 @@ C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.
 C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.0\HabitTracker.runtimeconfig.json
 C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.0\HabitTracker.dll
 C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.0\HabitTracker.pdb
-C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.0\Microsoft.Data.Sqlite.dll
-C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.0\SQLitePCLRaw.core.dll
 C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.0\HabitTrackingDatabase.dll
 C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\bin\Debug\net6.0\HabitTrackingDatabase.pdb
 C:\Users\Lenovo\Desktop\CsharpProjects\HabitTracker\HabitTracker\obj\Debug\net6.0\HabitTracker.csproj.AssemblyReference.cache

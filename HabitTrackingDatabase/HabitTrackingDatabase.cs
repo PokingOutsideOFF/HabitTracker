@@ -34,8 +34,9 @@ namespace HabitTrackingDatabase
                 using(var command = new SQLiteCommand(selectQuery, connection))
                 {
                     using(var reader = command.ExecuteReader())
-                    {
+                    { 
                         Console.WriteLine("ID\tHabit\tQuantity");
+                        Console.WriteLine("-----------------------");
                         while (reader.Read())
                         {
                             Console.WriteLine($"{reader["id"]}\t{reader["habit_name"]}\t{reader["quantity"]}");
