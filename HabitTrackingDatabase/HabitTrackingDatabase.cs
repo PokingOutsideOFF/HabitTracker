@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System.Data;
+using System.Data.SQLite;
 
 namespace HabitTrackingDatabase
 {
@@ -6,6 +7,11 @@ namespace HabitTrackingDatabase
     {
         public void InitializeDatabse()
         {
+            if (File.Exists("habits.db"))
+            {
+                return;
+            }
+
             using (var connection = new SQLiteConnection("Data Source= habits.db"))
             {
                 connection.Open();
@@ -13,12 +19,39 @@ namespace HabitTrackingDatabase
                     CREATE TABLE IF NOT EXISTS habits(
                        id INTEGER PRIMARY KEY AUTOINCREMENT,
                        habit_name TEXT NOT NULL,
-                       quantity TEXT NOT NULL
+                       quantity INTEGER NOT NULL
                     );";
 
                 using (var command = new SQLiteCommand(createTableQuery, connection))
                 {
                     command.ExecuteNonQuery();
+                }
+                SeedHabits();
+            }
+        }
+
+        void SeedHabits()
+        {
+            int count = 0;
+            List<string> habitList = new List<string> { "Walking", "Cycling", "Meditating", "Drinkling water", "Reading", "Playing Video Games"};
+            Random random = new Random();
+            using (var connection = new SQLiteConnection("Data Source= habits.db"))
+            {
+                connection.Open();
+                while(count < 100)
+                {
+                    int index = random.Next(habitList.Count);
+                    string habitName = habitList[index];
+                    int quantity = random.Next(1, 6);
+                    string insertQuery = "INSERT INTO habits (habit_name, quantity) VALUES (@habit_name, @quantity)";
+                    using(var command = new SQLiteCommand(insertQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@habit_name", habitName);
+                        command.Parameters.AddWithValue("@quantity", quantity);
+                        command.ExecuteNonQuery();
+                    }
+
+                    count++;
                 }
             }
         }
@@ -52,9 +85,20 @@ namespace HabitTrackingDatabase
         {
             Console.Write("Enter habit name: ");
             string? habitName = Console.ReadLine();
+            int habitQuantity;
+            while (true)
+            {
+                Console.Write("Enter quantity: ");
+                if (int.TryParse(Console.ReadLine(), out habitQuantity))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid integer");
+                }
+            }
 
-            Console.Write("Enter quantity: ");
-            string? habitQuantity = Console.ReadLine();
             using(var connection = new SQLiteConnection("Data Source= habits.db"))
             {
                 connection.Open();
@@ -119,18 +163,28 @@ namespace HabitTrackingDatabase
                 }
             }
 
+            int newQuantity;
+            while (true)
+            {
+                Console.Write("Enter new quantity: ");
+                if (int.TryParse(Console.ReadLine(), out newQuantity))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Enter valid integer");
+                }
+            }
 
-            Console.Write("Enter new quantity: ");
-            string? newQuanity = Console.ReadLine();
-
-            using(var connection = new SQLiteConnection("Data Source = habits.db"))
+            using (var connection = new SQLiteConnection("Data Source = habits.db"))
             {
                 connection.Open();
                 string updateQuery = "UPDATE habits SET quantity = @quantity WHERE id = @id";
                 using(var command = new SQLiteCommand(updateQuery, connection))
                 {
                     command.Parameters.AddWithValue("@id", id);
-                    command.Parameters.AddWithValue("@quantity", newQuanity);
+                    command.Parameters.AddWithValue("@quantity", newQuantity);
                     command.ExecuteNonQuery();
                 }
             }
