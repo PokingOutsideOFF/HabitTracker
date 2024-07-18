@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 
 namespace HabitTrackingDatabase
@@ -190,6 +192,143 @@ namespace HabitTrackingDatabase
             }
 
             Console.WriteLine("\nHabit updated succesfully.\n\n");
+        }
+
+        public void ReportHabit()
+        {
+            Console.WriteLine("\nChoose the option for which report is to be generated: ");
+            Console.WriteLine("1. Which habit you spend maximum time on and how much?");
+            Console.WriteLine("2. How much time/quantity you spend on a specific habit?");
+            Console.WriteLine("3. Habits with quantities greater than a specific value?");
+            Console.Write("\nEnter choice: ");
+            string? choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    MaximumTimeQuery();
+                    break;
+                case "2":
+                    Console.Write("Enter habit: ");
+                    string? habit_name = Console.ReadLine();
+                    TimeSpentOnHabitQuery(habit_name);
+                    break;
+                case "3":
+                    int quantity;
+                    while (true)
+                    {
+                        Console.Write("Enter quantity: ");
+                        if (int.TryParse(Console.ReadLine(), out quantity))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter valid integer");
+                        }
+                    }
+                    GreaterThanValueQuery(quantity);
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice\n");
+                    break;
+            }
+        }
+
+        void MaximumTimeQuery()
+        {
+            try
+            {
+
+                using (var connection = new SQLiteConnection("Data Source= habits.db"))
+                {
+                    connection.Open();
+                    string query = @"
+                    SELECT habit_name, total_quantity
+                    FROM (SELECT habit_name,  SUM(quantity) AS total_quantity
+                            FROM habits
+                            GROUP BY habit_name
+                    )as quantity
+                    ORDER BY total_quantity DESC
+                    LIMIT 1;";
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            Console.WriteLine("\n-----------------------");
+                            Console.WriteLine("Habit\tQuantity");
+                            Console.WriteLine("-----------------------");
+                            while(reader.Read())
+                                Console.WriteLine($"{reader[0]}\t{reader[1]}");
+                             
+                        }
+                        Console.WriteLine("-----------------------\n");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Opps error occured: " + ex.Message + "\n");
+                return;
+            }
+        }
+           
+        void TimeSpentOnHabitQuery(string habit_name)
+        {
+            using (var connection = new SQLiteConnection("Data Source= habits.db"))
+            {
+                connection.Open();
+                string query = $"SELECT SUM(quantity) FROM habits WHERE habit_name = '{habit_name}'";
+                using(var command = new SQLiteCommand(query, connection))
+                {
+                    using(var reader = command.ExecuteReader())
+                    {
+                        Console.WriteLine("\n-----------------------");
+                        Console.WriteLine("Time/Quantity");
+                        Console.WriteLine("-----------------------");
+                        while(reader.Read())
+                            Console.WriteLine($"{reader[0]}");
+                    }
+                }
+                Console.WriteLine("-----------------------\n");
+            }
+        }
+
+        void GreaterThanValueQuery(int quantity)
+        {
+            try
+            {
+
+
+                using (var connection = new SQLiteConnection("Data Source= habits.db"))
+                {
+                    connection.Open();
+                    string query = @$"
+                    SELECT habit_name, total_quantity
+                    FROM (SELECT habit_name, SUM(quantity) AS total_quantity
+                          FROM habits
+                          GROUP BY habit_name
+                           )
+                    WHERE total_quantity > {quantity}
+                    GROUP BY  habit_name;";
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            Console.WriteLine("\n-----------------------");
+                            Console.WriteLine("Habit\tQuantity");
+                            Console.WriteLine("-----------------------");
+                            while (reader.Read())
+                                Console.WriteLine($"{reader[0]}\t{reader[1]}");
+                        }
+                    }
+                    Console.WriteLine("-----------------------\n");
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Opps error occured: " + ex.Message + "\n");
+            }
         }
     }
 

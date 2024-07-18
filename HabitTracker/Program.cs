@@ -14,13 +14,13 @@ namespace HabitTracker
 
         void Menu()
         {
-            string? choice = "";
+            string? choice ;
             try
             {
+                HabitDatabase db = new HabitDatabase();
+                db.InitializeDatabse();
                 do
                 {
-                    HabitDatabase db = new HabitDatabase();
-                    db.InitializeDatabse();
 
                     Console.WriteLine("MAIN MENU");
                     Console.WriteLine("\nWhat would you like to do\n");
@@ -29,6 +29,7 @@ namespace HabitTracker
                     Console.WriteLine("Type 2 to Insert Record");
                     Console.WriteLine("Type 3 to Delete Record");
                     Console.WriteLine("Type 4 to Update Record");
+                    Console.WriteLine("Type 5 to Generate Report");
                     Console.WriteLine("----------------------------\n");
                     Console.Write("Enter choice: ");
                     choice = Console.ReadLine().Trim();
@@ -48,6 +49,9 @@ namespace HabitTracker
                             break;
                         case "4":
                             db.UpdateHabits();
+                            break;
+                        case "5":
+                            db.ReportHabit();
                             break;
                         default:
                             Console.WriteLine("Invalid choice\n\n");
